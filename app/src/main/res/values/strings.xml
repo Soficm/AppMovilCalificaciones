@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">Univa_calificaciones</string>
+    <string name="bienvenidos">BIENVENIDOS</string>
+    <string name="portal">PORTAL CALIFICACIONES UNIVA</string>
+    <string name="siguiente">Siguiente</string>
+
+    <string-array name="campus">
+        <item>Seleccione el campus</item>
+        <item>Aguascalientes</item>
+        <item>Colima</item>
+        <item>Guadalajara</item>
+        <item>Lagos de Moreno</item>
+        <item>La Piedad</item>
+        <item>León</item>
+        <item>Puerto Vallarta</item>
+        <item>Querétaro</item>
+        <item>Tepic</item>
+        <item>Uruapan</item>
+        <item>Zamora</item>
+    </string-array>
 </resources>
