@@ -32,7 +32,7 @@ public class Inicio extends AppCompatActivity {
         rbtAlumno = findViewById(R.id.rbt_Alumno);
         rbtDocente = findViewById(R.id.rbt_Docente);
         btnSiguiente = findViewById(R.id.btn_siguiente);
-        rgpGrupo = findViewById(R.id.rgp_Grupo);
+        rgpGrupo = findViewById(R.id.rgp_Grupo)
 
         btnSiguiente.setOnClickListener(new View.OnClickListener() {
             @Override
