@@ -3,6 +3,12 @@
     <string name="bienvenidos">BIENVENIDOS</string>
     <string name="portal">PORTAL CALIFICACIONES UNIVA</string>
     <string name="siguiente">Siguiente</string>
+    <string name="alumnos">ALUMNOS</string>
+    <string name="matricula">Matrícula</string>
+    <string name="password">Contraseña</string>
+    <string name="entrar">Entrar</string>
+    <string name="docente">DOCENTE</string>
+    <string name="clave">Clave</string>
 
     <string-array name="campus">
         <item>Seleccione el campus</item>

@@ -3,6 +3,7 @@ package com.euniva.univa_calificaciones.Vistas;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.WindowManager;
 
 import com.euniva.univa_calificaciones.R;
 
