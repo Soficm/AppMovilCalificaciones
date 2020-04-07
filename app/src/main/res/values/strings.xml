@@ -9,6 +9,22 @@
     <string name="entrar">Entrar</string>
     <string name="docente">DOCENTE</string>
     <string name="clave">Clave</string>
+    <string name="materias">Materias por cuatrimestre</string>
+    <string name="carrera">Carrera a mostar</string>
+    <string name="periodo">Periodo a mostrar</string>
+
+    <string name="title_activity_nav_alumno">NavAlumno</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="menu_home">Home</string>
+
+    <string name="menu_calificacion">Calificaciones cuatrimestrales</string>
+    <string name="menu_historial">Historial académico</string>
+    <string name="menu_salir">Cerrar sesión</string>
 
     <string-array name="campus">
         <item>Seleccione el campus</item>
