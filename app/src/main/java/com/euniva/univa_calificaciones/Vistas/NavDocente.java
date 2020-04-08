@@ -6,31 +6,30 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.euniva.univa_calificaciones.R;
-import com.euniva.univa_calificaciones.Vistas.Fragments.Calificacion.CalificacionFragment;
-import com.euniva.univa_calificaciones.Vistas.Fragments.Historial.HistorialFragment;
-import com.google.android.material.navigation.NavigationView;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.AppCompatActivity;
 
-public class NavAlumno extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+import com.euniva.univa_calificaciones.R;
+import com.euniva.univa_calificaciones.Vistas.Fragments.RegistroCal;
+import com.google.android.material.navigation.NavigationView;
+
+public class NavDocente extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     DrawerLayout drawer;
     Toolbar toolbar;
     ActionBarDrawerToggle toggle;
     NavigationView navigationView;
 
-    LoginAlumno la = new LoginAlumno();
+    LoginDocente lc = new LoginDocente();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nav_alumno);
+        setContentView(R.layout.activity_nav_docente);
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -40,9 +39,9 @@ public class NavAlumno extends AppCompatActivity implements NavigationView.OnNav
         navigationView = findViewById(R.id.nav_view);
         View hView = navigationView.getHeaderView(0);
         TextView usuario = (TextView) hView.findViewById(R.id.txt_user);
-        usuario.setText(la.usuario);
-        TextView matricula=(TextView) hView.findViewById(R.id.txt_matricula);
-        matricula.setText(la.matri);
+        usuario.setText(lc.usuario);
+        TextView clave=(TextView) hView.findViewById(R.id.txt_clave);
+        clave.setText(lc.clav);
         navigationView.setNavigationItemSelectedListener(this);
 
         toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -51,19 +50,16 @@ public class NavAlumno extends AppCompatActivity implements NavigationView.OnNav
 
 
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CalificacionFragment()).commit();
-            navigationView.setCheckedItem(R.id.nav_calificacion);
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new RegistroCal()).commit();
+            navigationView.setCheckedItem(R.id.nav_registro);
         }
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.nav_calificacion:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CalificacionFragment()).commit();
-                break;
-            case R.id.nav_historial:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HistorialFragment()).commit();
+            case R.id.nav_registro:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new RegistroCal()).commit();
                 break;
             case R.id.nav_salir:
                 Intent intent = new Intent(getApplicationContext(), Inicio.class);

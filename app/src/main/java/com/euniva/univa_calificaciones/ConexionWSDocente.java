@@ -2,8 +2,7 @@ package com.euniva.univa_calificaciones;
 
 import android.util.Log;
 
-import com.euniva.univa_calificaciones.Vistas.LoginAlumno;
-import com.loopj.android.http.HttpGet;
+import com.euniva.univa_calificaciones.Vistas.LoginDocente;
 
 import org.json.JSONObject;
 
@@ -11,42 +10,44 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 import cz.msebera.android.httpclient.client.ClientProtocolException;
+import cz.msebera.android.httpclient.client.methods.HttpPost;
 import cz.msebera.android.httpclient.impl.client.BasicResponseHandler;
 import cz.msebera.android.httpclient.impl.client.DefaultHttpClient;
 
-public class ConexionWSAlumno {
+public class ConexionWSDocente {
 
     LinkConexion dev = new LinkConexion();
     String developing = dev.url;
-    String url = developing + "Alumnoes/IngresarAlumno";
+    String url = developing + "Docentes/IngresarDocente";
     public String response;
-    public LoginAlumno la;
-    public ModeloAlumno ma;
+    public LoginDocente lc;
+    public ModeloDocente mc;
 
     public String getServerResponseLogin() {
 
 
-        HttpGet get = new HttpGet(url + "?matricula=" + la.matricula + "&contrasena=" + la.contrasena);
+        HttpPost post = new HttpPost(url + "?usuario=" + lc.clave + "&contrasena=" + lc.contrasena);
 
         try {
-            get.setHeader("Content-type", "application/json");
+            post.setHeader("Content-type", "application/json");
 
             DefaultHttpClient client = new DefaultHttpClient();
 
             BasicResponseHandler handler = new BasicResponseHandler();
 
-            response = client.execute(get, handler);
+            response = client.execute(post, handler);
 
             // Leemos los datos del servicio web
             try {
-                ma = new ModeloAlumno();
+                mc = new ModeloDocente();
 
                 JSONObject obj = new JSONObject(response);
 
-                ma.setNombre(obj.getString("Nombre"));
-                ma.setApellidos(obj.getString("Apellidos"));
-                ma.setMatricula(obj.getString("Matricula"));
-                ma.setId(obj.getInt("Id"));
+                mc.setNombre(obj.getString("Nombre"));
+                mc.setApellidos(obj.getString("Apellidos"));
+                mc.setClabe(obj.getString("Clabe"));
+                mc.setUsuario(obj.getString("Usuario"));
+                mc.setId(obj.getInt("Id"));
 
             } catch (Throwable t) {
                 Log.e("My App", "Could not parse malformed JSON: \"" + response + "\"");
@@ -64,4 +65,3 @@ public class ConexionWSAlumno {
     }
 
 }
-

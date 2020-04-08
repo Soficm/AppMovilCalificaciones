@@ -1,8 +1,14 @@
 <resources>
 
+    <!-- Base application theme. -->
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">17dp</item>
+        <item name="itemTextColor">@drawable/drawer_item</item>
+        <item name="itemIconTint">@drawable/drawer_item</item>
     </style>
+
 </resources>

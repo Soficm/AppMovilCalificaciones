@@ -13,6 +13,7 @@
     <string name="carrera">Carrera a mostar</string>
     <string name="periodo">Periodo a mostrar</string>
 
+
     <string name="title_activity_nav_alumno">NavAlumno</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -25,6 +26,9 @@
     <string name="menu_calificacion">Calificaciones cuatrimestrales</string>
     <string name="menu_historial">Historial académico</string>
     <string name="menu_salir">Cerrar sesión</string>
+    <string name="menu_registro">Registro calificaciones</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string-array name="campus">
         <item>Seleccione el campus</item>

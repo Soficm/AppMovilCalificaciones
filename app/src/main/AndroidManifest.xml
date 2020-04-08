@@ -10,9 +10,9 @@
         android:roundIcon="@drawable/icono_univa"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Vistas.NavDocente"></activity>
         <activity
             android:name=".Vistas.NavAlumno"
-            android:label="@string/title_activity_nav_alumno"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Vistas.LoginDocente"
@@ -30,7 +30,6 @@
             </intent-filter>
         </activity>
     </application>
-
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 

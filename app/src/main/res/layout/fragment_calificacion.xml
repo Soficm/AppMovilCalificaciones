@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Vistas.FragmentAlumno.Calificacion.CalificacionFragment">
+    tools:context=".Vistas.Fragments.Calificacion.CalificacionFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:paddingTop="10dp"
+            android:paddingTop="15dp"
             android:text="@string/materias"
             android:textColor="@color/titles"
             android:textSize="28dp"
@@ -37,15 +37,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/carrera"
-                android:textSize="24dp"
+                android:textSize="20dp"
                 android:textStyle="bold"
-                android:paddingTop="15dp"/>
+                android:paddingTop="25dp"/>
 
         <Spinner
             android:id="@+id/spn_carrera"
             android:layout_width="200dp"
             android:layout_height="40dp"
-            android:layout_marginTop="-35dp"
+            android:layout_marginTop="-30dp"
             android:layout_marginStart="75dp"
             android:layout_marginLeft="75dp"/>
 
@@ -53,9 +53,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/periodo"
-            android:textSize="24dp"
+            android:textSize="20dp"
             android:textStyle="bold"
-            android:paddingTop="15dp"/>
+            android:paddingTop="20dp"/>
 
         <Spinner
             android:id="@+id/spn_periodo"

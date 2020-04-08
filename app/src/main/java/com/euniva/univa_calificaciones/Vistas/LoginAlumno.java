@@ -64,9 +64,10 @@ public class LoginAlumno extends AppCompatActivity {
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);
                                 finish();
+                                usuario = servicio.ma.nombre + " " +servicio.ma.apellidos;
+                                matri = servicio.ma.matricula;
                             }
-                            usuario = servicio.ma.nombre + " " +servicio.ma.apellidos;
-                            matri = servicio.ma.matricula;
+
                         }
 
                     }.execute();

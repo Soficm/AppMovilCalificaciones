@@ -51,7 +51,6 @@
                 android:background="@drawable/edittext"
                 android:drawableLeft="@drawable/profesor"
                 android:hint="@string/clave"
-                android:inputType="number"
                 android:layout_marginTop="30dp"
                 android:textColor="@color/titles"
                 android:textCursorDrawable="@null"
@@ -79,6 +78,15 @@
                 android:layout_marginTop="140dp"
                 android:textColor="@color/white"
                 android:backgroundTint="@color/blue"/>
+
+            <ProgressBar
+                android:id="@+id/progress_circular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:indeterminate="false"
+                android:max="48"
+                android:visibility="invisible"
+                android:layout_centerHorizontal="true" />
 
         </LinearLayout>
 
