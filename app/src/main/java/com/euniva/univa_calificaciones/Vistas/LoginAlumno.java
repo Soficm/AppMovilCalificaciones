@@ -21,6 +21,7 @@ public class LoginAlumno extends AppCompatActivity {
     public static String matricula, contrasena;
     private ProgressBar progressBar;
     public static String usuario, matri;
+    public static int id;
 
     ConexionWSAlumno servicio = new ConexionWSAlumno();
 
@@ -66,6 +67,7 @@ public class LoginAlumno extends AppCompatActivity {
                                 finish();
                                 usuario = servicio.ma.nombre + " " +servicio.ma.apellidos;
                                 matri = servicio.ma.matricula;
+                                id=servicio.ma.id;
                             }
 
                         }

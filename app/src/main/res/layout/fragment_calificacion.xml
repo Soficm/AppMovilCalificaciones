@@ -26,27 +26,29 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingTop="15dp"
+            android:gravity="left"
+            android:layout_marginTop="-30dp"
+            android:layout_marginRight="27dp"
             android:text="@string/materias"
             android:textColor="@color/titles"
             android:textSize="28dp"
             android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/carrera"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:paddingTop="25dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="30dp"
+            android:text="@string/carrera"
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
         <Spinner
             android:id="@+id/spn_carrera"
-            android:layout_width="200dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="-30dp"
-            android:layout_marginStart="75dp"
+            android:layout_width="230dp"
+            android:layout_height="55dp"
+            android:background="@drawable/spinner"
+            android:layout_marginTop="-40dp"
+            android:layout_marginStart="80dp"
             android:layout_marginLeft="75dp"/>
 
         <TextView
@@ -55,15 +57,25 @@
             android:text="@string/periodo"
             android:textSize="20dp"
             android:textStyle="bold"
-            android:paddingTop="20dp"/>
+            android:paddingTop="25dp"/>
 
         <Spinner
             android:id="@+id/spn_periodo"
-            android:layout_width="200dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="-35dp"
-            android:layout_marginStart="75dp"
-            android:layout_marginLeft="80dp"/>
+            android:layout_width="230dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="-40dp"
+            android:layout_marginStart="80dp"
+            android:layout_marginLeft="80dp"
+            android:background="@drawable/spinner"/>
+
+            <TableLayout
+                android:id="@+id/tbl_calificaciones"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingTop="35dp"
+                android:shrinkColumns="*"
+                android:stretchColumns="*" />
 
     </LinearLayout>
 

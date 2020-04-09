@@ -12,6 +12,8 @@
     <string name="materias">Materias por cuatrimestre</string>
     <string name="carrera">Carrera a mostar</string>
     <string name="periodo">Periodo a mostrar</string>
+    <string name="historial">Historial académico</string>
+    <string name="consutla">Consulta el historial académico de los programas que has cursado</string>
 
 
     <string name="title_activity_nav_alumno">NavAlumno</string>
