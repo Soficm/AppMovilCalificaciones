@@ -9,7 +9,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TableLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -110,7 +109,7 @@ public class CalificacionFragment extends Fragment {
 
                 tblCalificaciones.removeAllViewsInLayout();
                 tblCalificaciones.removeAllViews();
-               idPeriodo=servicio.periodo.get(i).idperiodo;
+                idPeriodo = servicio.periodo.get(i).idperiodo;
 
                 new AsyncTask<Void, Void, String>() {
 

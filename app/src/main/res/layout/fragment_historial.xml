@@ -53,11 +53,21 @@
 
         <Spinner
             android:id="@+id/spn_carrera"
-            android:layout_width="200dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="-30dp"
-            android:layout_marginStart="75dp"
+            android:layout_width="230dp"
+            android:layout_height="55dp"
+            android:background="@drawable/spinner"
+            android:layout_marginTop="-40dp"
+            android:layout_marginStart="80dp"
             android:layout_marginLeft="75dp"/>
+
+        <TableLayout
+            android:id="@+id/tbl_historial"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingTop="50dp"
+            android:shrinkColumns="*"
+            android:stretchColumns="*" />
 
 
     </LinearLayout>

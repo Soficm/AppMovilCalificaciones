@@ -10,7 +10,8 @@
         android:roundIcon="@drawable/icono_univa"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Vistas.NavDocente"></activity>
+        <activity android:name=".Vistas.NavDocente"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".Vistas.NavAlumno"
             android:theme="@style/AppTheme.NoActionBar" />

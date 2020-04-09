@@ -25,13 +25,15 @@ public class ConexionWSAlumno {
     String urlCarrera = developing + "alumnoes/mostrarCarrerasAlumno/";
     String urlPeriodo = developing + "Periodoes/GetAll";
     String urlCalificacion = developing + "alumnoes/getCalificacionPeriodo/";
-    public String response, responseCarrera, responsePeriodo, responseCalificacion;
+    String urlHistorial = developing + "Alumnoes/getHistorial/";
+    public String response, responseCarrera, responsePeriodo, responseCalificacion, responseHistorial;
     public LoginAlumno la;
     public ModeloAlumno ma;
     public CalificacionFragment cf;
     public ArrayList<ModeloAlumno> carrera = new ArrayList<>();
     public ArrayList<ModeloAlumno> periodo = new ArrayList<>();
     public ArrayList<ModeloAlumno> calificacion = new ArrayList<>();
+    public ArrayList<ModeloAlumno> historial = new ArrayList<>();
 
     public String getServerResponseLogin() {
 
@@ -192,6 +194,50 @@ public class ConexionWSAlumno {
                 Log.e("My App", "Could not parse malformed JSON: \"" + responseCalificacion + "\"");
             }
             return responseCalificacion;
+
+        } catch (UnsupportedEncodingException e) {
+            Log.d("JWP", e.toString());
+        } catch (ClientProtocolException e) {
+            Log.d("JWP", e.toString());
+        } catch (IOException e) {
+            Log.d("JWP", e.toString());
+        }
+        return "No se pudo conectar con el servidor";
+    }
+
+    public String getServerResponseHistorial() {
+
+        HttpGet get = new HttpGet(urlHistorial + la.id);
+
+        try {
+            get.setHeader("Content-type", "application/json");
+
+            DefaultHttpClient client = new DefaultHttpClient();
+
+            BasicResponseHandler handler = new BasicResponseHandler();
+
+            responseHistorial = client.execute(get, handler);
+
+            // Leemos los datos del servicio web
+            try {
+
+                JSONArray obj = new JSONArray(responseHistorial);
+
+                for (int i = 0; i < obj.length(); i++) {
+                    ma = new ModeloAlumno();
+                    JSONObject elemento;
+                    elemento = obj.getJSONObject(i);
+
+                    ma.setMateria(elemento.getString("Materia"));
+                    ma.setCalificacion(elemento.getInt("Calificacion"));
+                    ma.setGrupo(elemento.getString("Grupo"));
+                    historial.add(i, ma);
+                }
+
+            } catch (Throwable t) {
+                Log.e("My App", "Could not parse malformed JSON: \"" + responseHistorial + "\"");
+            }
+            return responseHistorial;
 
         } catch (UnsupportedEncodingException e) {
             Log.d("JWP", e.toString());
