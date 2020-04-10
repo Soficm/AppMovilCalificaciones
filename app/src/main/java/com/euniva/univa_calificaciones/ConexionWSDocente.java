@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.client.ClientProtocolException;
 import cz.msebera.android.httpclient.client.methods.HttpPost;
+import cz.msebera.android.httpclient.client.methods.HttpPut;
 import cz.msebera.android.httpclient.entity.StringEntity;
 import cz.msebera.android.httpclient.impl.client.BasicResponseHandler;
 import cz.msebera.android.httpclient.impl.client.DefaultHttpClient;
@@ -29,7 +30,8 @@ public class ConexionWSDocente {
     String urlAlumnosCal = developing + "Calificaciones/getCalificacionesByGrupo/";
     String urlAlumnos = developing + "Alumnoes/getAll";
     String urlCalificacion = developing + "Calificaciones/PostCalificaciones";
-    public String response, responseMateria, responseAlumnosCal, responseAlumnos, responseMandarCal;
+    String urlEditarCalif = developing + "Calificaciones/PutCalificaciones/";
+    public String response, responseMateria, responseAlumnosCal, responseAlumnos, responseMandarCal, responseEditarCal;
     public LoginDocente lc;
     public ModeloDocente mc;
     public RegistroCal rc;
@@ -197,6 +199,11 @@ public class ConexionWSDocente {
                     mc.setIdalumno(elemento.getInt("Id"));
                     mc.setAlumnonombre(elemento.getString("Nombre"));
                     mc.setAlumnoapellidos(elemento.getString("Apellidos"));
+                    mc.setAlumnomatricula(elemento.getString("Matricula"));
+                    mc.setRfc(elemento.getString("Rfc"));
+                    mc.setCurp(elemento.getString("Curp"));
+                    mc.setPassword(elemento.getString("Password"));
+                    mc.setLogin(elemento.getBoolean("Logueado"));
                     alumnos.add(i, mc);
                 }
 
@@ -256,6 +263,66 @@ public class ConexionWSDocente {
                 Log.e("My App", "Could not parse malformed JSON: \"" + responseMandarCal + "\"");
             }
             return responseMandarCal;
+
+        } catch (UnsupportedEncodingException e) {
+            Log.d("JWP", e.toString());
+        } catch (ClientProtocolException e) {
+            Log.d("JWP", e.toString());
+        } catch (IOException e) {
+            Log.d("JWP", e.toString());
+        }
+        return "No se pudo conectar con el servidor";
+    }
+
+    public String formatDataAsJson2(ModeloDocente data) {
+
+        final JSONObject device = new JSONObject();
+        JSONObject subdataAlumno = new JSONObject();
+        JSONObject subdataGrupo = new JSONObject();
+        try {
+            subdataGrupo.put("Id", data.getIdgrupo());
+            subdataGrupo.put("Clave", data.getGrupo());
+            subdataAlumno.put("Matricula", data.getAlumnomatricula());
+            subdataAlumno.put("Id", data.getIdalumno());
+            subdataAlumno.put("Nombre", data.getAlumnonombre());
+            subdataAlumno.put("Apellidos", data.getAlumnoapellidos());
+            subdataAlumno.put("Rfc", data.getRfc());
+            subdataAlumno.put("Curp", data.getCurp());
+            subdataAlumno.put("Password", data.getPassword());
+            subdataAlumno.put("Logueado", data.isLogin());
+            device.put("Calificacion", data.getCalif());
+            device.put("IdAlumnos", subdataAlumno);
+            device.put("IdGrupo", subdataGrupo);
+
+            return device.toString(1);
+        } catch (JSONException e) {
+            Log.d("JWP", "Can't format JSON");
+        }
+        return null;
+    }
+
+    public String getServerResponseEditarCalificacion(String json) {
+
+        HttpPut put = new HttpPut(urlEditarCalif + rc.Id);
+
+        try {
+            StringEntity entity = new StringEntity(json, "UTF-8");
+            put.setEntity(entity);
+            put.setHeader("Content-type", "application/json");
+
+            DefaultHttpClient client = new DefaultHttpClient();
+
+            BasicResponseHandler handler = new BasicResponseHandler();
+
+            responseEditarCal = client.execute(put, handler);
+
+            // Leemos los datos del servicio web
+            try {
+
+            } catch (Throwable t) {
+                Log.e("My App", "Could not parse malformed JSON: \"" + responseEditarCal + "\"");
+            }
+            return responseEditarCal;
 
         } catch (UnsupportedEncodingException e) {
             Log.d("JWP", e.toString());

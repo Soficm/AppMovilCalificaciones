@@ -4,6 +4,7 @@ public class ModeloDocente {
 
     public String clabe, usuario, nombre, apellidos, rfc, curp, password, grupo, periodo, materia,alumnomatricula,alumnonombre,alumnoapellidos;
     public int id, idgrupo,idcalgrupo,calif,idalumno;
+    public boolean login;
 
     public String getClabe() {
         return clabe;
@@ -147,6 +148,14 @@ public class ModeloDocente {
 
     public void setIdalumno(int idalumno) {
         this.idalumno = idalumno;
+    }
+
+    public boolean isLogin() {
+        return login;
+    }
+
+    public void setLogin(boolean login) {
+        this.login = login;
     }
 }
 
