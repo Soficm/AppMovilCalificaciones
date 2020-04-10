@@ -64,6 +64,7 @@
                 android:background="@drawable/edittext"
                 android:drawableLeft="@drawable/lock"
                 android:hint="@string/password"
+                android:inputType="textPassword"
                 android:layout_marginTop="40dp"
                 android:textColor="@color/titles"
                 android:textCursorDrawable="@null"
