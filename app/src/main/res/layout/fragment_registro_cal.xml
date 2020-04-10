@@ -1,14 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Vistas.Fragments.RegistroCal">
+    tools:context=".Vistas.Fragments.Calificacion.CalificacionFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
 
-</FrameLayout>
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_weight="1"
+            android:gravity="right"
+            app:srcCompat="@drawable/icono_univa"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:layout_marginTop="-30dp"
+            android:layout_marginRight="27dp"
+            android:text="@string/registro"
+            android:textColor="@color/titles"
+            android:textSize="28dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="30dp"
+            android:text="@string/materia"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/spn_materia"
+            android:layout_width="300dp"
+            android:layout_height="55dp"
+            android:background="@drawable/spinner"
+            android:layout_marginTop="-40dp"
+            android:layout_marginStart="35dp"
+            android:layout_marginLeft="75dp"/>
+
+        <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="15dp"
+        android:text="@string/grupo"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txt_grupo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="-27dp"
+            android:textStyle="normal"
+            android:textSize="20dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="15dp"
+            android:text="@string/periodos"
+            android:textSize="20dp"
+            android:layout_marginStart="120dp"
+            android:layout_marginTop="-38dp"
+            android:textStyle="bold"
+            android:layout_marginLeft="120dp" />
+
+        <TextView
+            android:id="@+id/txt_periodo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="175dp"
+            android:layout_marginTop="-27dp"
+            android:textSize="20dp"
+            android:textStyle="normal"
+            android:layout_marginLeft="100dp" />
+
+        <TableLayout
+            android:id="@+id/tbl_alumnoscalificaciones"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingTop="35dp"
+            android:shrinkColumns="*"
+            android:stretchColumns="*" />
+
+        <Button
+            android:id="@+id/btn_editar"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="@string/editar"
+            android:layout_gravity="left"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="30dp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/blue"/>
+
+        <Button
+            android:id="@+id/btn_nuevo"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="@string/nuevo"
+            android:layout_gravity="right"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="-48dp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/blue"/>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

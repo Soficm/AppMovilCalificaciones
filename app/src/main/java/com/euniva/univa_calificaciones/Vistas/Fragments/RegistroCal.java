@@ -1,65 +1,263 @@
 package com.euniva.univa_calificaciones.Vistas.Fragments;
 
+import android.app.Dialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TableLayout;
+import android.widget.TextView;
 
+import com.euniva.univa_calificaciones.ConexionWSDocente;
+import com.euniva.univa_calificaciones.ModeloDocente;
 import com.euniva.univa_calificaciones.R;
+import com.euniva.univa_calificaciones.Table;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link RegistroCal#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+
 public class RegistroCal extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    Spinner spnMateria, spnAlumno;
+    public static int idGrupo, idAlumno, calif;
+    public ArrayList materias, alumnos;
+    private TextView txtGrupo, txtPeriodo;
+    private TableLayout tblAlumnoscalificaciones;
+    private String[] header = {"Matrícula", "Nombre", "Calif"};
+    private ArrayList<String[]> rows = new ArrayList<>();
+    Table tablaAlumnosCalificaciones;
+    private Button btnNuevo, btnEditar;
+    public String formatDataAsJson;
+    public EditText edtCalif;
 
-    public RegistroCal() {
-        // Required empty public constructor
+    ConexionWSDocente servicio = new ConexionWSDocente();
+
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_registro_cal, container, false);
+
+        txtGrupo = view.findViewById(R.id.txt_grupo);
+        txtPeriodo = view.findViewById(R.id.txt_periodo);
+        spnMateria = view.findViewById(R.id.spn_materia);
+        btnEditar = view.findViewById(R.id.btn_editar);
+        btnNuevo = view.findViewById(R.id.btn_nuevo);
+
+        tblAlumnoscalificaciones = view.findViewById(R.id.tbl_alumnoscalificaciones);
+
+        tablaAlumnosCalificaciones = new Table(tblAlumnoscalificaciones, getActivity().getApplicationContext());
+
+        new AsyncTask<Void, Void, String>() {
+
+            @Override
+            protected String doInBackground(Void... voids) {
+                return servicio.getServerResponseMateria();
+            }
+
+            protected void onPostExecute(String result) {
+                materias = new ArrayList();
+                for (int i = 0; i < servicio.materias.size(); i++) {
+                    materias.add(servicio.materias.get(i).materia);
+                }
+
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.spinner_item, materias);
+                spnMateria.setAdapter(arrayAdapter);
+
+                int idgrp = spnMateria.getSelectedItemPosition();
+
+                idGrupo = servicio.materias.get(idgrp).idgrupo;
+
+                new AsyncTask<Void, Void, String>() {
+
+                    @Override
+                    protected String doInBackground(Void... voids) {
+                        return servicio.getServerResponseAlumnosCal();
+                    }
+
+                    protected void onPostExecute(String result) {
+                        tablaAlumnosCalificaciones.addHeader(header);
+                        tablaAlumnosCalificaciones.addData(getAlumnosCalificaciones());
+                        tablaAlumnosCalificaciones.backgroundHeader(R.color.blue);
+                        tblAlumnoscalificaciones.removeAllViewsInLayout();
+                        tblAlumnoscalificaciones.removeAllViews();
+                        rows.removeAll(rows);
+                    }
+                }.execute();
+
+            }
+        }.execute();
+
+        spnMateria.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                tblAlumnoscalificaciones.removeAllViewsInLayout();
+                tblAlumnoscalificaciones.removeAllViews();
+
+                txtGrupo.setText(servicio.materias.get(i).grupo);
+                txtPeriodo.setText(servicio.materias.get(i).periodo);
+                idGrupo = servicio.materias.get(i).idgrupo;
+
+                new AsyncTask<Void, Void, String>() {
+
+                    @Override
+                    protected String doInBackground(Void... voids) {
+                        return servicio.getServerResponseAlumnosCal();
+                    }
+
+                    protected void onPostExecute(String result) {
+                        tablaAlumnosCalificaciones.addHeader(header);
+                        tablaAlumnosCalificaciones.addData(getAlumnosCalificaciones());
+                        tablaAlumnosCalificaciones.backgroundHeader(R.color.blue);
+                        rows.removeAll(rows);
+
+                    }
+                }.execute();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        btnNuevo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NuevoCalificacion();
+
+            }
+        });
+
+        return view;
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment RegistroCal.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static RegistroCal newInstance(String param1, String param2) {
-        RegistroCal fragment = new RegistroCal();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private ArrayList<String[]> getAlumnosCalificaciones() {
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+        for (int i = 0; i < servicio.alumnoscal.size(); i++) {
+            rows.add(new String[]{servicio.alumnoscal.get(i).alumnomatricula, servicio.alumnoscal.get(i).alumnonombre + " " + servicio.alumnoscal.get(i).alumnoapellidos, String.valueOf(servicio.alumnoscal.get(i).calif)});
         }
+        servicio.alumnoscal.clear();
+        return rows;
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_registro_cal, container, false);
+    public void NuevoCalificacion() {
+        final Dialog alerta = new Dialog(getActivity(), R.style.Theme_Dialog_Translucent);
+        alerta.requestWindowFeature(Window.FEATURE_LEFT_ICON);
+        alerta.setContentView(R.layout.nuevo_calificacion);
+
+        DisplayMetrics displaymetrics = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+        int width = (int) (displaymetrics.widthPixels * 0.84);
+        int height = (int) (displaymetrics.heightPixels * 0.84);
+        alerta.getWindow().setLayout(width, height);
+
+        TextView titulo = (TextView) alerta.findViewById(R.id.titulo);
+        titulo.setText("Nueva Califiación Alumno");
+
+        spnAlumno = alerta.findViewById(R.id.spn_alumno);
+
+        new AsyncTask<Void, Void, String>() {
+
+            @Override
+            protected String doInBackground(Void... voids) {
+                return servicio.getServerResponseAlumnos();
+            }
+
+            protected void onPostExecute(String result) {
+                alumnos = new ArrayList();
+                for (int i = 0; i < servicio.alumnos.size(); i++) {
+                    alumnos.add(servicio.alumnos.get(i).alumnonombre + " " + servicio.alumnos.get(i).alumnoapellidos);
+                }
+
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.spinner_item, alumnos);
+                spnAlumno.setAdapter(arrayAdapter);
+
+                int idalum = spnAlumno.getSelectedItemPosition();
+
+                idAlumno = servicio.alumnos.get(idalum).idalumno;
+
+            }
+        }.execute();
+
+        spnAlumno.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                idAlumno = servicio.alumnos.get(i).idalumno;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        edtCalif = alerta.findViewById(R.id.edt_calif);
+
+
+        Button btnGuardar = (Button) alerta.findViewById(R.id.btn_guardar);
+        btnGuardar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                calif = Integer.parseInt(edtCalif.getText().toString().trim());
+                mandarDatosPost();
+                final String json = formatDataAsJson;
+
+                new AsyncTask<Void, Void, String>() {
+
+                    @Override
+                    protected String doInBackground(Void... voids) {
+                        return servicio.getServerResponseMandarCalificacion(json);
+                    }
+
+                    protected void onPostExecute(String result) {
+                        alerta.cancel();
+
+                        new AsyncTask<Void, Void, String>() {
+
+                            @Override
+                            protected String doInBackground(Void... voids) {
+                                return servicio.getServerResponseAlumnosCal();
+                            }
+
+                            protected void onPostExecute(String result) {
+                                tblAlumnoscalificaciones.removeAllViewsInLayout();
+                                tblAlumnoscalificaciones.removeAllViews();
+                                tablaAlumnosCalificaciones.addHeader(header);
+                                tablaAlumnosCalificaciones.addData(getAlumnosCalificaciones());
+                                tablaAlumnosCalificaciones.backgroundHeader(R.color.blue);
+                                rows.removeAll(rows);
+
+                            }
+                        }.execute();
+                    }
+                }.execute();
+
+            }
+        });
+        alerta.show();
+    }
+
+    public void mandarDatosPost() {
+
+        ModeloDocente cp = new ModeloDocente();
+        cp.setCalif(calif);
+        cp.setIdalumno(idAlumno);
+        cp.setIdgrupo(idGrupo);
+
+        ConexionWSDocente p = new ConexionWSDocente();
+        formatDataAsJson = p.formatDataAsJson(cp);
     }
 }

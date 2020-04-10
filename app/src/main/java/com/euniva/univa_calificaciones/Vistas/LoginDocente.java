@@ -29,6 +29,7 @@ public class LoginDocente extends AppCompatActivity {
     public static String clave, contrasena;
     private ProgressBar progressBar;
     public static String usuario, clav;
+    public static int id;
 
     ConexionWSDocente servicio = new ConexionWSDocente();
 
@@ -68,12 +69,13 @@ public class LoginDocente extends AppCompatActivity {
                                 progressBar.setVisibility(View.INVISIBLE);
                                 Toast.makeText(getApplicationContext(), "Usuario incorrecto, verifique su clave y/o contraseña", Toast.LENGTH_SHORT).show();
                             } else {
-                                Intent intent = new Intent(getApplicationContext(),NavDocente.class);
+                                Intent intent = new Intent(getApplicationContext(), NavDocente.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);
                                 finish();
                                 usuario = servicio.mc.nombre + " " + servicio.mc.apellidos;
                                 clav = servicio.mc.usuario;
+                                id = servicio.mc.id;
                             }
 
                         }

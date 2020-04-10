@@ -14,6 +14,15 @@
     <string name="periodo">Periodo a mostrar</string>
     <string name="historial">Historial académico</string>
     <string name="consutla">Consulta el historial académico de los programas que has cursado</string>
+    <string name="registro">Registro de calificaciones</string>
+    <string name="materia">Materia</string>
+    <string name="grupo">Grupo:</string>
+    <string name="periodos">Periodo:</string>
+    <string name="editar">Editar</string>
+    <string name="nuevo">Nuevo</string>
+    <string name="alumno">Alumno</string>
+    <string name="calificacion">Calificacion</string>
+    <string name="guardar">Guardar</string>
 
 
     <string name="title_activity_nav_alumno">NavAlumno</string>

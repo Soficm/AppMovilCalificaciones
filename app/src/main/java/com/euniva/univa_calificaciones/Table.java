@@ -65,7 +65,7 @@ public class Table {
     private void createDataTable() {
         int datos = data.size();
         String info;
-        if (datos <= 5) {
+        if (datos <= 15) {
             for (indexR = 1; indexR <= data.size(); indexR++) { //Recorrer las filas y se inicializa en 1 porque la fila 0 es el encabezado
                 newRow();
                 for (indexC = 0; indexC < header.length; indexC++) {
@@ -113,8 +113,6 @@ public class Table {
             tableRow.addView(txtCell, newTableRowParams());
         }
         tableLayout.addView(tableRow, data.size() - 1);
-
-        reColoring();
     }
 
     public void backgroundHeader(int color) {

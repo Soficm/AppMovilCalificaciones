@@ -2,8 +2,8 @@ package com.euniva.univa_calificaciones;
 
 public class ModeloDocente {
 
-    public String clabe, usuario, nombre, apellidos, rfc, curp, password;
-    public int id;
+    public String clabe, usuario, nombre, apellidos, rfc, curp, password, grupo, periodo, materia,alumnomatricula,alumnonombre,alumnoapellidos;
+    public int id, idgrupo,idcalgrupo,calif,idalumno;
 
     public String getClabe() {
         return clabe;
@@ -68,4 +68,85 @@ public class ModeloDocente {
     public void setId(int id) {
         this.id = id;
     }
+
+    public String getGrupo() {
+        return grupo;
+    }
+
+    public void setGrupo(String grupo) {
+        this.grupo = grupo;
+    }
+
+    public String getPeriodo() {
+        return periodo;
+    }
+
+    public void setPeriodo(String periodo) {
+        this.periodo = periodo;
+    }
+
+    public String getMateria() {
+        return materia;
+    }
+
+    public void setMateria(String materia) {
+        this.materia = materia;
+    }
+
+    public int getIdgrupo() {
+        return idgrupo;
+    }
+
+    public void setIdgrupo(int idgrupo) {
+        this.idgrupo = idgrupo;
+    }
+
+    public String getAlumnomatricula() {
+        return alumnomatricula;
+    }
+
+    public void setAlumnomatricula(String alumnomatricula) {
+        this.alumnomatricula = alumnomatricula;
+    }
+
+    public String getAlumnonombre() {
+        return alumnonombre;
+    }
+
+    public void setAlumnonombre(String alumnonombre) {
+        this.alumnonombre = alumnonombre;
+    }
+
+    public String getAlumnoapellidos() {
+        return alumnoapellidos;
+    }
+
+    public void setAlumnoapellidos(String alumnoapellidos) {
+        this.alumnoapellidos = alumnoapellidos;
+    }
+
+    public int getIdcalgrupo() {
+        return idcalgrupo;
+    }
+
+    public void setIdcalgrupo(int idcalgrupo) {
+        this.idcalgrupo = idcalgrupo;
+    }
+
+    public int getCalif() {
+        return calif;
+    }
+
+    public void setCalif(int calif) {
+        this.calif = calif;
+    }
+
+    public int getIdalumno() {
+        return idalumno;
+    }
+
+    public void setIdalumno(int idalumno) {
+        this.idalumno = idalumno;
+    }
 }
+
